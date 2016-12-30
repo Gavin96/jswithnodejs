@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<meta http-equiv="Content-Type" content="text/html; charset="utf-8">
+    <script src="/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="/lib/angular-ui-grid/ui-grid.js"></script>    
+    <script src="/lib/angular-ui-select/dist/select.js"></script>
+    <link rel="stylesheet" href="/lib/angular-ui-select/dist/select.css">
+    <script src="/scripts/dashboardConfig/maintainDashboardConfigCtrl.js"></script>
+</head>
+<body   ng-app="dashboardConfigApp">
+<div class="container-fluid">
+    <div class="col-md-10 col-md-offset-1">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" ng-controller="maintainDashboardConfigCtrl">
+                <form name="searchForm" class="form-inline">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"><h2 class="group-head"><b>搜索条件</b></h2></div>
+                    <div class="margin-20 col-md-4 col-sm-12 col-xs-12">                    
+                        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 form-label">
+                            <label> <span class="dash-label" style="font-weight: bold;">应用系统 ：</span> </label>
+                        </div>
+                        <div class="col-md-8  col-sm-8 col-xs-8" style="padding-left: 0px; padding-right: 25px;">
+                            <ui-select ng-model="config.externalSystem" theme="bootstrap" append-to-body="true"
+                                       multiple="true" style="width: 100%;">
+                                <ui-select-match>{{$item.sysName}}</ui-select-match>
+                                <ui-select-choices repeat="item._id as item in externalSystems | filter: $select.search">
+                                    <div>{{item.sysName}}</div>
+                                </ui-select-choices>
+                            </ui-select>
+                        </div>
+                    </div>
+
+                    <div class="margin-20 col-md-5 col-sm-12 col-xs-12" style="padding:0 0 0 0px;" >
+                        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 form-label" style="left:10px;">
+                            <label> <span class="dash-label" style="font-weight: bold;">Dashboard名称 ：</span> </label>
+                        </div>
+                        <div class="col-md-8 col-sm-8 col-xs-8"  style="left:9px;">
+                            <!--<input id="searchInput2" style="position: relative;left:5px;width:95%" type="text" class="form-control" ng-model="config.reportName" ng-keypress="($event.charCode==13)?submitForm():return" name="reportName" placeholder="默认查询全部报表">-->
+                            <input id="searchInput2" style="width:95%;padding-bottom:5px;margin-top: 2px;" type="text" class="form-control" ng-model="config.reportName" ng-keypress="" name="reportName"  placeholder="默认查询全部报表">
+                        </div>
+                    </div>
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="padding-left: 0px;">
+                        <div class="margin-20 col-md-3 col-sm-12 col-xs-12" ng-controller="DemoCtrl">
+                        <!-- ng-controller可嵌套定义，此处实践 -->
+                            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 form-label" style="left:13px;">
+                                <label> <span class="dash-label" style="font-weight: bold;">更新人：</span> </label>
+                            </div>
+                            <div class="col-md-8 col-sm-8 col-xs-8" style="left:9px;">
+                                <ui-select ng-model="config.updateUser" theme="bootstrap" append-to-body="true"
+                                           multiple="true" style="width: 128%;">
+                                    <ui-select-match>
+                                        {{$item.Name}}
+                                    </ui-select-match>
+                                    <ui-select-choices repeat="item.Name as item in updateUserNames | filter: $select.search">
+                                    <!-- filter : 过滤操作，从而依据select中已经输入的字符匹配联想到相符合的项，并过滤掉不符项 -->
+                                        <div>{{item.Name}}</div>
+                                    </ui-select-choices>
+                                </ui-select>
+                            </div>
+                        </div>
+
+                        <div class="margin-20 col-md-3 col-sm-12 col-xs-12"  ng-controller="SelectDropdown">
+                            <div class="col-lg-4 col-md-5 col-sm-12 col-xs-12 form-label" style="left:37px;padding-left: 0px;"><label>
+                                    <span class="dash-label" style="font-weight: bold;">激活状态：</span></label></div>
+                            <div class="col-md-8 col-sm-8 col-xs-8" style="left:30px;" >
+                                <select id="searchInputActive" style="width: 95%; padding-bottom: 5px; margin-top: 2px;"
+                                        ng-model="config.active" class="form-control" >
+                                    <option ng-repeat="act in activities" value="{{act.value}}">{{act.name}}</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="margin-20 col-md-3 col-sm-12 col-xs-12">
+                            <button type="button" class="btn btn-sm btn-primary float-r" style="margin-left:8px; height:35px;padding-bottom:5px;margin-top: 2px; width: 100px;"
+                                    ng-click="submitForm(searchForm)">查询</button>
+                        </div>
+                    </div>
+
+
+
+                </form>
+                </div>
+             </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
