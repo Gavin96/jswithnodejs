@@ -94,6 +94,7 @@ var app = angular.module('dashboardConfigApp',
                     +   "</div>"
                 },
                 {
+                    // ui-grid 中对于表格单元内容修改时候书写js function的办法
                     name: 'active', enableCellEdit: true, displayName: '激活状态',
                     cellTemplate: "<div class='ui-grid-cell-contents' title='TOOLTIP'>{{col.colDef.expre(grid, row, col, value)}}</div>",
                 // {{col.colDef.expre(row, col)}}
@@ -124,9 +125,9 @@ var app = angular.module('dashboardConfigApp',
 
 
 
-        
-// var app2 = angular.module('dashboardConfigApp', ['ngSanitize', 'ui.select']);
 
+// var app2 = angular.module('dashboardConfigApp', ['ngSanitize', 'ui.select']);
+//  filter 操作实现的机制 ：
 app.filter('propsFilter', function(){
     return function (items, props) {
         var out = [];

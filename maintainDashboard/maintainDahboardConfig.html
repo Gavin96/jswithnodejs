@@ -42,6 +42,7 @@
                     </div>
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="padding-left: 0px;">
                         <div class="margin-20 col-md-3 col-sm-12 col-xs-12" ng-controller="DemoCtrl">
+                        <!-- ng-controller可嵌套定义，此处实践 -->
                             <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 form-label" style="left:13px;">
                                 <label> <span class="dash-label" style="font-weight: bold;">更新人：</span> </label>
                             </div>
@@ -52,6 +53,7 @@
                                         {{$item.Name}}
                                     </ui-select-match>
                                     <ui-select-choices repeat="item.Name as item in updateUserNames | filter: $select.search">
+                                    <!-- filter : 过滤操作，从而依据select中已经输入的字符匹配联想到相符合的项，并过滤掉不符项 -->
                                         <div>{{item.Name}}</div>
                                     </ui-select-choices>
                                 </ui-select>
